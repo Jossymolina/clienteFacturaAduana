@@ -23,9 +23,8 @@ export class UsuariosComponent implements OnInit {
  arregloSucursal= new Array();
   ngOnInit(): void {
     this._ServiciosService.SacarSucursal().subscribe(
-      
-      Response=>{
-     this.arregloSucursal = Response.resultado;
+    Response=>{
+       this.arregloSucursal = Response.resultado;
       }
     )
     }
@@ -36,10 +35,20 @@ export class UsuariosComponent implements OnInit {
    this._ServiciosService.guardarUsuario(this.modelousuario).subscribe(
      Response=>{
         if (Response.mensaje) {
-          Swal.fire(Response.mensaje);
+          Swal.fire({
+            icon: 'error',
+            title: 'ERROR',
+            text: Response.mensaje,
+            footer: 'CONTROL DE ERRORES DEL SISTEMA'
+          })
         } else {
           if (Response.resultado) {
-            Swal.fire(Response.resultado)
+            Swal.fire({
+              icon: 'success',
+              title: 'ERROR',
+              text: "CREADO CON EXITO",
+              footer: 'CONTROL  DEL SISTEMA'
+            })
             this.modelousuario={
               nombre:"",
               password:"",

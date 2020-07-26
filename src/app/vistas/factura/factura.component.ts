@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { ServiciosService } from "../../services/servicios.service"
 import * as numero from 'numero-a-letras';
 import Swal from 'sweetalert2'
+import { IfStmt } from '@angular/compiler';
 @Component({
   selector: 'app-factura',
   templateUrl: './factura.component.html',
@@ -40,7 +41,11 @@ export class FacturaComponent implements OnInit {
     this._ServiciosService.sacarcliente().subscribe(
       Response => {
         if (Response.mensaje) {
-          Swal.fire(Response.mensaje)
+          Swal.fire({
+            icon: 'error',
+            title: "ERROR",
+            text: Response.mensaje
+          })
          
         } else {
           this.arregloCliente = Response.resultado
@@ -55,8 +60,36 @@ export class FacturaComponent implements OnInit {
   }
   cambiarSecuencia(data) {
     if (data===3) {
+      if (this.conceptofactura === undefined) {
+        Swal.fire({
+          icon: 'error',
+          title: "ERROR",
+          text: "INGRESE EL CONCEPTO"
+        })
+        
+       }else{
+        Swal.fire({
+          title: 'Estas Seguro',
+          text: "Deseas Generar la Factura",
+          icon: 'warning',
+          showCancelButton: true,
+          cancelButtonText: "Cancelar",
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Acepto'
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'LISTO!',
+              'TU FACTURA FUE GENERADA CORRECTAMENTE',
+              'success'
+            )
+              this.sacarNumeracionFactura();
+              this.secuencia2 = data
+          }
+        })
        
-      this.sacarNumeracionFactura();
+       }
       
     } else {
       this.secuencia = data;
@@ -123,8 +156,33 @@ eliminarproducto(posicion){
 
   }
   siguiente(data) {
-  
+    console.log(this.Clienteselecionado)
+  if (data===2) {
+    
+       if (this.Clienteselecionado === undefined) {
+        Swal.fire({
+          icon: 'error',
+          title: "ERROR",
+          text: "SELECCIONE EL CLIENTE"
+        })
+        
+       }else{
+        this.secuencia2 = data
+       }
+  } else if(data===4) {
+    if (this.arregladeservicios.length===0) {
+      Swal.fire({
+        icon: 'error',
+        title: "ERROR",
+        text: "EL CARRITO ESTA VACIO / AGREGUE UN SERVICIO"
+      })
+      
+     }else{
       this.secuencia2 = data
+     }
+    
+  }
+     
     
     
     
@@ -138,9 +196,10 @@ eliminarproducto(posicion){
         if (Response.mensaje) {
           Swal.fire({
             icon: 'error',
-            title: "Ocurrio un error",
+            title: "ERROR",
             text: Response.mensaje
           })
+          this.secuencia2 = 4;
   
         } else {
           this.numeracionFactura = Response.resultado[0];
@@ -169,8 +228,7 @@ eliminarproducto(posicion){
           }
           this._ServiciosService.actualizarrangoActual(params).subscribe(
             Response=>{
-              
-              this.secuencia = 3;
+                  this.secuencia = 3;
              
               
             }
@@ -197,9 +255,13 @@ guardarServicio(){
   this._ServiciosService.guardarServicios(servicios).subscribe(
     Response=>{
       if (Response.mensaje) {
-        alert(Response.mensaje)
+           Swal.fire({
+            icon: 'error',
+            title: "ERROR",
+            text: Response.mensaje
+          })
+         
       } else {
-        console.log(Response)
         this.servicionuevo.idservicios = Response.resultado.insertId;
         this.servicionuevo.total = (this.servicionuevo.precio*this.servicionuevo.cantidad)-this.servicionuevo.descuento
         this.arregladeservicios.push(this.servicionuevo);
@@ -212,6 +274,11 @@ guardarServicio(){
         codigo_servicio:"",
         idservicios:0
         }
+        Swal.fire({
+          icon: 'success',
+          title: "EXCELENTE",
+          text: "GUARDADO CON EXITO"
+        })
       }
     }
   )
@@ -222,6 +289,7 @@ sacarservicios(){
   var params={
     codigoservicio:this.codigoservicioabuscar
   }
+ 
   this._ServiciosService.sacarservicios(params).subscribe(
     Response=>{
       if (Response.mensaje) {
@@ -235,6 +303,7 @@ sacarservicios(){
         this.codigoservicioabuscar=""
       
       }else{
+       
         this.servicionuevo.precio = Response.resultado[0].precio_normal;
         this.servicionuevo.servicio = Response.resultado[0].servicio;
         this.servicionuevo.total = (Response.resultado[0].precio_normal*this.servicionuevo.cantidad)-this.servicionuevo.descuento

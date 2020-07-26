@@ -125,5 +125,37 @@ sacarservicios(data): Observable<any>{
     })
     return this.http.post(this.url+"Rservicios",json,{headers: headers})
   }
+  sacarFacturaPornumero(data):Observable<any>{
+    var json =JSON.stringify(data)
+    let headers= new HttpHeaders({
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    })
+    return this.http.post(this.url+"Rfacturapornumero",json,{headers: headers})
+  }
+  sacardetalles(data):Observable<any>{
+    var json =JSON.stringify(data)
+    let headers= new HttpHeaders({
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    })
+    return this.http.post(this.url+"Rdetalles",json,{headers: headers})
+  }
+  sacarfacturaporfecha(data):Observable<any>{
+    var json =JSON.stringify(data)
+    let headers= new HttpHeaders({
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    })
+    return this.http.post(this.url+"RfacturaporFecha",json,{headers: headers})
+  }
   
+  sacarfacturaporcliente(data):Observable<any>{
+    var json =JSON.stringify(data)
+    let headers= new HttpHeaders({
+      "Content-Type":"application/json",
+      "Authorization":localStorage.getItem("token")
+    })
+    return this.http.post(this.url+"Rfacturaporcliente",json,{headers: headers})
+  }
 }

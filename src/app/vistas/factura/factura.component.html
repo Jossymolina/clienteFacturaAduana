@@ -1,0 +1,392 @@
+<div *ngIf="secuencia===0" class="card card-success">
+    <div class="card-header">
+        <h3 class="card-title">Carrito / <strong>{{usuario?.sucursal}} </strong> </h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form *ngIf="secuencia2===1" >
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md- col-sm-8 col-12">
+                    <label for="">Seleccione el Cliente</label>
+                    <select [(ngModel)]="Clienteselecionado" name="Clienteselecionado"  class="form-control">
+                        <option *ngFor ="let i of arregloCliente" [ngValue]="i"> {{i?.nombre}} </option>
+                    </select>
+                </div>
+                <div class="col-md-4 col-sm-4 col-12">
+                    <label for="">Agregar nuevo Cliente</label>
+                    <button routerLink="/cliente" class="btn btn-primary form-control">+</button>
+                </div>
+                <div style="margin-top: 10px;" class="col-md-2 col-sm-2 col-12">
+                   
+                    <button (click)="siguiente(2)" class="btn btn-success form-control">Siguiente</button>
+                </div>
+                <div class="col-md-10 col-sm-10 col-12">
+                   
+                </div>
+            </div>
+        </div>
+        
+    </form>
+    <div *ngIf="secuencia2===2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-12 " >
+                    <div style="cursor: pointer; height: 10px !important;" class="info-box" >
+                        <span class="info-box-icon bg-success"><i class="fa fa-handshake-o"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number"><h3>Cliente: {{Clienteselecionado?.nombre}} /Ciudad:{{Clienteselecionado?.ciudad}}/ Telefono: {{Clienteselecionado?.telefono}} </h3> </span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <div class="col-md-6 col-sm-6 col-12">
+                    <div style="cursor: pointer" class="info-box" data-toggle="modal" data-target="#modal-secondary">
+                        <span class="info-box-icon bg-info"><i class="fa fa-cart-plus"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Agregar.</span>
+                            <span class="info-box-number">Agrega Pruducto al Carrito</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <div class="col-md-6 col-sm-6 col-12">
+                    <div style="cursor: pointer" class="info-box">
+                        <span (click)="sacarservicios()" class="info-box-icon bg-info"><i class="fa fa-search-plus"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Ingreco codigo del servicio.</span>
+                            <input (keyup)="enter($event)"   [(ngModel)]="codigoservicioabuscar" name="codigoservicioabuscar" class="form-control" type="text">
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+            </div>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="background: #70FFB1;">
+                        <th>#</th>
+                        <th>Nombre Servicio</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Descuento</th>
+                        <th>Total</th>
+                        <th>Opcion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let i of arregladeservicios; let n = index">
+                    <tr data-widget="expandable-table" aria-expanded="false">
+                        <td>{{n+1}} </td>
+                        <td>{{i.servicio}} </td>
+                        <td>L. {{i.cantidad}} 
+                                    
+                            
+                        </td>
+                        <td>L. {{i.precio}} </td>
+                        <td>L. {{i.descuento}} </td>
+                        <td>L. {{i.total}} </td>
+                        <td> <button style="text-align:right;margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Aumentar la cantidad del producto" class="btn btn-warning" (click)="aumentarcantidad(i)">+</button>
+                            <button style="text-align:right;margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Disminuir la cantidad del producto" class="btn btn-success" (click)="disminuir(i)">-</button>
+                            <button style="text-align:right;margin-right: 3px;" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar producto" (click)="eliminarproducto(n)">X</button>
+                        </td>
+                     
+                    </tr>
+                
+                </ng-container>
+                <tr>
+                    <td colspan="2" >Total</td> 
+                
+                    <td >suma</td> 
+                    <td >suma</td> 
+                    <td >suma</td> 
+                    <td >suma</td> 
+                    <td >Opcion</td> 
+                 
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="card-footer">
+            <button (click)=" siguiente(4)" class="btn btn-primary">Generar Factura</button>
+           
+        </div>
+    </div>
+    <form *ngIf="secuencia2===4" >
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md- col-sm-8 col-12">
+                    <label for="">Ingrese el Concepto prebe</label>
+                    
+                    <input type="text" class="form-control" [(ngModel)]="conceptofactura" name="conceptofactura">
+                </div>
+              
+                <div  class="col-md-2 col-sm-2 col-12">
+                    <label for=""> Siguiente</label>
+                    <button (click)="cambiarSecuencia(3)" class="btn btn-success form-control">=></button>
+                </div>
+                <div class="col-md-10 col-sm-10 col-12">
+                   
+                </div>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+<!--Aqui se genera el formato de factura-->
+<div id="print-section" *ngIf="secuencia===3" class="jumbotron">
+    <!--Encabesado de la factura-->
+    <div class="row" style="height: 70px;text-align: center; padding-top: 0px; padding-bottom: 0px;">
+        
+            <img  class="col-md-3"  style="width: 70px; height: 70px; float:left; width:20%;  padding-top: 0px; padding-bottom: 0px;  " src="../../../assets/logo1.gif">
+  
+        <div class="col-md-6"  style="float:left; width:60%;  padding-top: 0px; padding-bottom: 0px; height: 70px;">
+            <label  style="font-size: 12; LINE-HEIGHT:12px;  padding-top: 0px;">AGENCIA ADUANERA FONCECA CANACA S.de R.L</label>
+            <br style="margin-bottom: 0px; margin-top: 0px;" >
+            <label> <strong  style="color:red; font-size: 14; LINE-HEIGHT:12px;  padding-top: 0px; padding-bottom: 0px; ">FACTURA TGU:</strong>  {{nuevanumeracionfactura}} </label>
+        </div>
+        <img class="col-md-3"   style="width: 70px; height: 70px; float:left; width:20%; padding-top: 0px; padding-bottom: 0px; " src="../../../assets/logo2.gif">
+     </div>
+     
+  
+
+    <div class="row">
+            <label for="" class="col-md-8" style="float: left; width:50%;  text-align: left; font-size: 11; LINE-HEIGHT:12px;">CAI: {{numeracionFactura?.cai}}</label>
+            <label for="" class="col-md-4" style="float:left; width:50%; text-align: right; font-size: 11; LINE-HEIGHT:12px;">ORIGINAL</label>
+            <hr style="width:100%; margin-top: 0px; margin-bottom: 0px;">
+            <label class="col-md-12" style="text-align: left; float:left; width:100%; font-size: 11;  LINE-HEIGHT:12px;"><strong style="color: red;" >Fecha de emicion:    {{fechaActual}} </strong></label>
+            <label class="col-md-8" style="text-align: left;; float:left; width:50%;  font-size: 11; LINE-HEIGHT:12px;"><strong style="color: red;">Vencimiento de pago: : {{fechaActual}}</strong></label>
+            <label class="col-md-4"  style="text-align: right; float:left; width:50%; color: red; LINE-HEIGHT:12px;" ><strong>Lp. {{subtotal + (subtotal * 0.15)}}</strong></label>
+           <label class="col-md-6" for="" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Facturado a:</strong></label>
+           <label class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Emitido por:</strong></label>
+           <label for=""  class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Cliente: {{Clienteselecionado?.nombre}}</strong></label>
+           <label for="" class="col-md-6" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Agencia Aduanera Fonceca:</strong></label>
+           <label for="" class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Direccion: {{Clienteselecionado?.direccion}}</strong></label>
+           <label for=""  class="col-md-6" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>RTN:08019011418473</strong></label>
+           <label for="" class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;" ><strong>RTN: {{Clienteselecionado?.rtn}}</strong></label>
+           <label  class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Tegucigalpa, Colonia 15 de Septiembre</strong></label>
+           <label class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;" for=""><strong>Por conceptos de:</strong></label>
+           <label for=""  class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>8 Calle Avenida Independencia Casa No. 1706</strong></label>
+           <label class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"  for=""><strong>{{conceptofactura}} </strong></label>
+           <label for="" class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>mail:info@fonsecanaca.com</strong></label>
+           <label for="" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;" ><strong>-----------------------------------------</strong></label>
+           <label for="" class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Telefono: 504-3255-7109</strong></label>
+        
+           <hr style="width:100%; margin-top: 0px; margin-bottom: 3px;">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class=" " style="width: 100%; text-align: center; background: #F3D1B1;">
+                <thead style="background: #DAF7B0;">
+                    <tr>
+                        <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">#</th>
+                        <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; " >Nombre Servicio</th>
+                        <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Cantidad</th>
+                        <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Precio</th>
+                        <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Descuento</th>
+                        <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Total</th>
+                    </tr>
+                </thead>
+                <tbody style="background: #F5FCEB; text-align: left;">
+                    <ng-container *ngFor="let i of arregladeservicios; let n = index">
+                        <tr data-widget="expandable-table" aria-expanded="false">
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">{{n+1}} </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">{{i.servicio}} </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.cantidad}} </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.precio}} </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.descuento}} </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.total}} </td>
+                        </tr>
+                    </ng-container>
+                    <tr data-widget="expandable-table" aria-expanded="false">
+                        <td colspan="2" style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Total </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"> </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"> </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"></td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px; color: red;">Lp. {{subtotal}} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr style="width:100%; margin-top: 2px; margin-bottom: 2px;">
+        <div class="col-md-8"  style=" float:left; width:60% ; ">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+        <div class="col-md-4"  style="float:left; width:40%; background:F8D5B5; text-align: center;  margin-top: 0px; margin-bottom: 0px;">
+            <table  style="background: #F8D5B5; width: 100%; height: 100px !important; " >
+               <tbody style=" height: 50px; margin-top: 0px; margin-bottom: 0px;" >
+                    <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
+                        <td  style="margin-top: 0px; margin-bottom: 0px;  font-size: 10;">IMPORTE EXONERADO </td>
+                        <td  style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. 0</td>
+                        
+                    </tr>
+                    <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; background: #F8D5B5;" >IMPORTE EXENTO
+                        </td>
+                        <td  style="margin-top: 0px; margin-bottom: 0px; font-size: 10; background: #F8D5B5;">Lp. 0</td>
+                        
+                    </tr>
+                    <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
+                        <td  style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">IMPORTE GRAVADO 15%
+                        </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. {{subtotal}} </td>
+                        
+                    </tr>
+                    <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >IMPORTE GRAVADO 18%
+                        </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. 0</td>
+                        
+                    </tr>
+                    <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >ISV 15%
+                        </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp.  {{(subtotal * 0.15)}} </td>
+                        
+                    </tr>
+                    <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >ISV 18%
+                        </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. 0 </td>
+                        
+                    </tr>
+                    <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >TOTAL A PAGAR
+                        </td>
+                        <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp. {{subtotal + (subtotal * 0.15)}} </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr style="width:100%; margin-top: 0px; margin-bottom: 3px;">
+        <div class="col-md-12" style=" margin-top: 1px;">
+            <p style="font-size: 8; margin-top:  2px; margin-bottom: 0px; LINE-HEIGHT:8px;">Valor en letras</p>
+            <label style="font-size: 12; margin-bottom: 0px; LINE-HEIGHT:8px;" for=""><strong> {{numero_en_letra}} </strong></label>
+            <hr style="width:100%;  margin-top: 0px; margin-bottom: 0px; ">
+        </div>
+        <label class="col-md-6" for="" style="color: #713802; float:left; width:50%; font-size: 10px; margin-bottom: 0px; margin-top: 2px; LINE-HEIGHT:8px;">DETALLES DEL PAGO</label>
+        <label  class="col-md-6"for="" style="color: #713802; float:left; width:50%; font-size: 10px; margin-bottom: 0px; margin-top: 2px; text-align: right; LINE-HEIGHT:8px;">INFORMACION ADICIONAL</label>
+      
+
+     
+        <label class="col-md-6" style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for="">Nombre del beneficiario Agencia Aduanera Fonseca Canaca S de RL</label>
+      
+        <label class="col-md-6"  style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;" for="">www.fonsecanaca.com</label>
+      
+       
+        <label class="col-md-6" style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for="">Nombre del banco: BAC </label>
+      
+        <label class="col-md-6"  style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;" for="">info@fonsecanaca.com</label>
+       
+      
+        <label class="col-md-6" style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for=""> Tegucigalpa
+        </label>
+  
+        <label class="col-md-6"  style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;" for=""> 
+        </label>
+      
+       <div class="col-md-6" style=" float:left; width:60% ; margin-top: 0px; margin-bottom: 0px;">
+        <label style="  float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Número de cuenta 723246301
+        </label>
+       
+        <label style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Fecha Limite de Emision: 28 DE ENERO DEL 2021
+        </label>
+     
+        <label style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Rango Autorizado: {{numeracionFactura?.rango_inicio}} al  {{numeracionFactura?.rango_fin}}
+        </label>
+        
+        <label style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Original : Cliente Copia : Emisor 
+        </label>
+        
+       </div>
+       <div class="col-md-6" style=" float:left; width:40% ; " >
+        <table class="" >
+          
+            <tbody >
+                <tr data-widget="expandable-table" aria-expanded="false">
+                    <td style=" font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No. Correlativo Orden de Compra Exenta
+                    </td>
+                 
+                  
+                </tr>
+                <tr  data-widget="expandable-table" aria-expanded="false">
+                    <td style="  font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No. Correlativo de Constancia de Registro Exonerado
+                    </td>
+                  
+                </tr>
+                <tr  data-widget="expandable-table" aria-expanded="false">
+                    <td style="  font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No. Identificativo del Regisro de la SAG
+                    </td>
+                    
+                </tr>
+
+            </tbody>
+        </table>
+      
+       </div>
+       
+       <hr style="width:100%; margin-top: 0px; margin-bottom: 1px;">
+      
+             <label class="col-md-12" style="text-align: center; font-size: 8px; LINE-HEIGHT:8px;"><strong>EL PAGO DEBE REALIZARSE POR TRANSFERENCIA BANCARIA O MEDIANTE CHEQUE A NOMBRE DE AGENCIA ADUANERA
+                FONSECA CANACA S DE RL.</strong></label>
+      
+
+    
+    </div>
+
+    </div>
+  
+
+    <button *ngIf="secuencia===3"  printSectionId="print-section" ngxPrint>Imprimir</button>
+
+
+<div class="modal fade" id="modal-secondary">
+    <div class="modal-dialog">
+        <div class="modal-content bg-secondary">
+            <div class="modal-header">
+                <h4 class="modal-title">Control de servicios</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div style="color: white;" class="modal-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="">Servicio</label>
+                            <input class="form-control" [(ngModel)]="servicionuevo.servicio" name="servicio" type="text"  id="">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="">Codigo Producto</label>
+                            <input class="form-control" [(ngModel)]="servicionuevo.codigo_servicio" name="codigo_servicio" type="text"  id="">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="">Precio Normal</label>
+                            <input class="form-control" [(ngModel)]="servicionuevo.precio" name="precio" type="number"  id="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cerrar</button>
+                <button type="button" (click)="guardarServicio()" class="btn btn-outline-light">Agregar</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

@@ -1,0 +1,55 @@
+<div class="card card-success">
+    <div class="card-header">
+      <h3 class="card-title">Formulario de Cliente</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre Cliente.</label>
+          <input type="text" class="form-control" [(ngModel)]="modeloCliente.nombre" name="nombre" placeholder="Nombre Completo de Cliente">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Identidad.</label>
+          <input type="text" class="form-control"  [(ngModel)]="modeloCliente.identidad" name="identidad" placeholder="Identidad">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">RTN.</label>
+            <input type="text" class="form-control" [(ngModel)]="modeloCliente.rtn" name="rtn" placeholder="RTN">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Tipo de cliente.</label>
+             <select [(ngModel)]="modeloCliente.tipo_cliente" name="tipo_cliente"  class="form-control" id="">
+                 <option [ngValue]="'Comun'" >Comun</option>
+                 <option [ngValue]="'Frecuente'" >Frecuente</option>
+             </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Telefono.</label>
+            <input type="text" class="form-control" [(ngModel)]="modeloCliente.telefono" name="telefono" placeholder="Telefono">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Celular.</label>
+            <input type="text" class="form-control" [(ngModel)]="modeloCliente.celular" name="celular" placeholder="Celular">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Correo.</label>
+            <input type="mail" class="form-control" [(ngModel)]="modeloCliente.email" name="email" placeholder="Correo electronico">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Ciudad.</label>
+            <input type="text" class="form-control" [(ngModel)]="modeloCliente.ciudad" name="ciudad" placeholder="Ciudad">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Direccion.</label>
+            <input type="text" class="form-control" [(ngModel)]="modeloCliente.direccion" name="direccion" placeholder="Direccion Completa">
+          </div>
+
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer">
+        <button (click)="guardarcliente()" class="btn btn-primary">Guardar</button>
+      </div>
+    </form>
+  </div>

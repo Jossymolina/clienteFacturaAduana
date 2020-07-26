@@ -1,0 +1,55 @@
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- jquery validation -->
+      <div class="card card-primary">
+        <div class="card-header">
+          <h3 class="card-title">Crear Sucursal</h3>
+        </div>
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form id="quickForm">
+          <div class="card-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">CAI</label>
+              <input type="text" [(ngModel)]="modeloTalonario.cai" name="cai" class="form-control"  placeholder="Nombre Sucursal">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Rango Inicial de la Factura</label>
+              <input type="text" [(ngModel)]="modeloTalonario.rango_inicio" name="rango_inicio" class="form-control" placeholder="Direccion Sucursal">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Rango Final de la Factura</label>
+                <input type="text" [(ngModel)]="modeloTalonario.rango_fin" name="rango_fin" class="form-control" placeholder="Telefono sucursal">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Fecha de Vencimiento</label>
+                <input type="date" [(ngModel)]="modeloTalonario.fecha_vencimiento" name="fecha_vencimiento" class="form-control" placeholder="Celular Sucursal">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Selecione sucursal</label>
+                
+                <select [(ngModel)]="modeloTalonario.idsucursal" name="idsucursal" class="form-control"  id="">
+                    <option >---Seleccione Sucursal---</option>
+                    <ng-container *ngFor="let i of arregloSucursal">
+                    <option [ngValue]="i.idsucursal">{{i.sucursal}} </option>
+                  </ng-container>
+                  </select>
+              </div>
+          
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer">
+            <button (click)="guardar()" class="btn btn-primary">Guardar</button>
+          </div>
+        </form>
+      </div>
+      <!-- /.card -->
+      </div>
+    <!--/.col (left) -->
+    <!-- right column -->
+    <div class="col-md-6">
+
+    </div>
+    <!--/.col (right) -->
+  </div>

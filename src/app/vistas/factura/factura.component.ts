@@ -35,6 +35,7 @@ export class FacturaComponent implements OnInit {
   nuevanumeracionfactura;
   conceptofactura;
   codigoservicioabuscar;
+  totalCarrito=0;
   ngOnInit(): void {
 
     moment.locale('es');
@@ -127,18 +128,21 @@ export class FacturaComponent implements OnInit {
   aumentarcantidad(i){
         i.cantidad +=1;
         i.total = (i.cantidad * i.precio)-i.descuento;
+        this.sumarparaCarrito();
         return i;
   }
   disminuir(i){
     if(i.cantidad!==1){
       i.cantidad -=1;
       i.total = (i.cantidad * i.precio)-i.descuento;
+      this.sumarparaCarrito();
       return i;
     }
    
 }
 eliminarproducto(posicion){
   this.arregladeservicios.splice(posicion,1);
+  this.sumarparaCarrito();
 
 }
 
@@ -154,6 +158,12 @@ eliminarproducto(posicion){
     var ultimo = letras.replace("M.N.", "Centavos")
     this.numero_en_letra = ultimo.toUpperCase();
 
+  }
+  sumarparaCarrito(){
+    this.totalCarrito =0;
+    this.arregladeservicios.forEach(element => {
+      this.totalCarrito = this.totalCarrito +  element.total;
+    });
   }
   siguiente(data) {
     console.log(this.Clienteselecionado)
@@ -320,6 +330,7 @@ sacarservicios(){
         idservicios:0
         }
         this.codigoservicioabuscar=""
+        this.sumarparaCarrito();
       }
     }
   )

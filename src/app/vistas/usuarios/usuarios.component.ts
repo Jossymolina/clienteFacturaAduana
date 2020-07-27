@@ -45,7 +45,7 @@ export class UsuariosComponent implements OnInit {
           if (Response.resultado) {
             Swal.fire({
               icon: 'success',
-              title: 'ERROR',
+              title: 'EXCELENTE',
               text: "CREADO CON EXITO",
               footer: 'CONTROL  DEL SISTEMA'
             })

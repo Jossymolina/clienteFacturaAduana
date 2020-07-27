@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiciosService } from "./services/servicios.service"
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,17 +26,23 @@ ngOnInit(){
     this._ServiciosService.login(this.datlog).subscribe(
       Response=>{
     if (Response.mensaje) {
-         console.log(Response.mensaje)
+      
+      Swal.fire({
+        icon: 'error',
+        title: 'ERROR',
+        text: Response.mensaje,
+        footer: 'CONTROL DE ERRORES DEL SISTEMA'
+      })
     } else {
-        if (Response.resultado) {
+       
           console.log(Response)
         this.userlogin= Response.resultado[0] ;
         console.log(this.userlogin)
           this._ServiciosService.mantenertUsuario(Response.resultado[0] )
           this.vanderaDedivs=1;
-        } else {
-            console.log("OCURRIO UN GRAVE ERROR")
-        }
+        
+          
+        
     }
       }
     )

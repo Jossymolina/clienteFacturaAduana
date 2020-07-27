@@ -91,7 +91,7 @@
                         </td>
                         <td>L. {{i.precio}} </td>
                         <td>L. {{i.descuento}} </td>
-                        <td>L. {{i.total}} </td>
+                        <td >L. {{i.total}} </td>
                         <td> <button style="text-align:right;margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Aumentar la cantidad del producto" class="btn btn-warning" (click)="aumentarcantidad(i)">+</button>
                             <button style="text-align:right;margin-right: 3px;" data-toggle="tooltip" data-placement="top" title="Disminuir la cantidad del producto" class="btn btn-success" (click)="disminuir(i)">-</button>
                             <button style="text-align:right;margin-right: 3px;" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Eliminar producto" (click)="eliminarproducto(n)">X</button>
@@ -101,13 +101,13 @@
                 
                 </ng-container>
                 <tr>
-                    <td colspan="2" >Total</td> 
+                    <td colspan="2" >Total (Sin Impusto.)</td> 
                 
-                    <td >suma</td> 
-                    <td >suma</td> 
-                    <td >suma</td> 
-                    <td >suma</td> 
-                    <td >Opcion</td> 
+                    <td ></td> 
+                    <td ></td> 
+                    <td ></td> 
+                    <td style="background: red;" > {{totalCarrito}} </td> 
+                    <td >------</td> 
                  
                 </tr>
                 </tbody>

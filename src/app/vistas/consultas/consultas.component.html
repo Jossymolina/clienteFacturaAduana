@@ -1,112 +1,135 @@
 <div *ngIf="secuencia===1" class="row">
     <div class="col-12 col-sm-12">
-      <div class="card card-primary card-tabs">
-        <div class="card-header p-0 pt-1">
-          <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Por numero de Factura</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Por fecha</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill" href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages" aria-selected="false">Por cliente</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill" href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings" aria-selected="false">Otros</a>
-            </li>
-          </ul>
-        </div>
-        <div class="card-body">
-          <div class="tab-content" id="custom-tabs-one-tabContent">
-            <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
-             <form action="" class="row">
-                 <div class="col-md-10">
-                       <label for="">Ingrese el numero de Factura</label>
-                       <input (keyup)="enter($event,1)" [(ngModel)]="ObjetoAConsultar" name="ObjetoAConsultar"  class="form-control" style="border: red solid;" type="text" value="" placeholder="000-001-01-00004558">
-                 </div>
-                 <div class="col-md-2">
-                    <label for="">Buscar</label>
-                    <button  (click)=" sacarFacturapornumero()" class=" form-control btn btn-success">=></button>
-              </div>
-             </form>
+        <div class="card card-primary card-tabs">
+            <div class="card-header p-0 pt-1">
+                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
+                            href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
+                            aria-selected="true">Por numero de Factura</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
+                            href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
+                            aria-selected="false">Por fecha</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-messages-tab" data-toggle="pill"
+                            href="#custom-tabs-one-messages" role="tab" aria-controls="custom-tabs-one-messages"
+                            aria-selected="false">Por cliente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-settings-tab" data-toggle="pill"
+                            href="#custom-tabs-one-settings" role="tab" aria-controls="custom-tabs-one-settings"
+                            aria-selected="false">Otros</a>
+                    </li>
+                </ul>
             </div>
-            <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
-              <form action="" class="row">
-                <div class="col-md-10">
-                      <label for="">Seleccione la fecha</label>
-                      <input (keyup)="enter($event,2)" [(ngModel)]="ObjetoAConsultar" name="ObjetoAConsultar"  class="form-control" style="border: red solid;" type="date" value="" placeholder="000-001-01-00004558">
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+                    <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
+                        aria-labelledby="custom-tabs-one-home-tab">
+                        <form action="" class="row">
+                            <div class="col-md-10">
+                                <label for="">Ingrese el numero de Factura</label>
+                                <input (keyup)="enter($event,1)" [(ngModel)]="ObjetoAConsultar" name="ObjetoAConsultar"
+                                    class="form-control" style="border: red solid;" type="text" value=""
+                                    placeholder="000-001-01-00004558">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="">Buscar</label>
+                                <button (click)=" sacarFacturapornumero()"
+                                    class=" form-control btn btn-success">=></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
+                        aria-labelledby="custom-tabs-one-profile-tab">
+                        <form action="" class="row">
+                            <div class="col-md-10">
+                                <label for="">Seleccione la fecha</label>
+                                <input (keyup)="enter($event,2)" [(ngModel)]="ObjetoAConsultar" name="ObjetoAConsultar"
+                                    class="form-control" style="border: red solid;" type="date" value=""
+                                    placeholder="000-001-01-00004558">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="">Buscar</label>
+                                <button (click)="sacarporfecha()" class=" form-control btn btn-success">=></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel"
+                        aria-labelledby="custom-tabs-one-messages-tab">
+                        <form action="" class="row">
+                            <div class="col-md-10">
+
+                                <label for="">Seleccione el Cliente</label>
+                                <select [(ngModel)]="ObjetoAConsultar" name="ObjetoAConsultar" class="form-control">
+                                    <option *ngFor="let i of arregloCliente" [ngValue]="i"> {{i?.nombre}} </option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="">Buscar</label>
+                                <button (click)="sacarfacturaporcliente()"
+                                    class=" form-control btn btn-success">=></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel"
+                        aria-labelledby="custom-tabs-one-settings-tab">
+                        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis
+                        ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate.
+                        Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec
+                        interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at
+                        consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst.
+                        Praesent imperdiet accumsan ex sit amet facilisis.
+                    </div>
                 </div>
-                <div class="col-md-2">
-                   <label for="">Buscar</label>
-                   <button  (click)="sacarporfecha()" class=" form-control btn btn-success">=></button>
-             </div>
-            </form>
             </div>
-            <div class="tab-pane fade" id="custom-tabs-one-messages" role="tabpanel" aria-labelledby="custom-tabs-one-messages-tab">
-              <form action="" class="row">
-                <div class="col-md-10">
-                  
-                    <label for="">Seleccione el Cliente</label>
-                    <select [(ngModel)]="ObjetoAConsultar" name="ObjetoAConsultar"  class="form-control">
-                        <option *ngFor ="let i of arregloCliente" [ngValue]="i"> {{i?.nombre}} </option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                   <label for="">Buscar</label>
-                   <button  (click)="sacarfacturaporcliente()" class=" form-control btn btn-success">=></button>
-             </div>
-            </form>
-            </div>
-            <div class="tab-pane fade" id="custom-tabs-one-settings" role="tabpanel" aria-labelledby="custom-tabs-one-settings-tab">
-               Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
-            </div>
-          </div>
+            <!-- /.card -->
         </div>
-        <!-- /.card -->
-      </div>
     </div>
 
     <table class="table table-bordered table-hover col-12 col-sm-12">
-      <thead>
-          <tr style="background: #70FFB1;">
-              <th>#</th>
-              <th>Fecha Emicion</th>
-              <th>Nombre Cliente</th>
-              <th>Estado de la Factura</th>
-              <th>Numero Factura</th>
-              <th>Total</th>
-              <th>Opcion</th>
-          </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let item of arregloconsulta;let n = index">
-          <tr data-widget="expandable-table" aria-expanded="false">
-              <td>{{n+1}} </td>
-              <td>{{item.fecha_emecion}} </td>
-              <td> {{item.nombre}} </td>
-              <td>{{item.anulado}} </td>
-              <td>{{item.numero_factura}} </td>
-              <td>{{item.total}} </td>
-              <td>
-                <button (click)="verdetallesfactura(item)" class="btn btn-success">+</button>
-              </td>
-             
-           
-          </tr>
-      
-      </ng-container>
-     
-      </tbody>
-  </table>
- 
-  </div>
+        <thead>
+            <tr style="background: #70FFB1;">
+                <th>#</th>
+                <th>Fecha Emicion</th>
+                <th>Nombre Cliente</th>
+                <th>Estado de la Factura</th>
+                <th>Numero Factura</th>
+                <th>Total</th>
+                <th>Opcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of arregloconsulta;let n = index">
+                <tr data-widget="expandable-table" aria-expanded="false">
+                    <td>{{n+1}} </td>
+                    <td>{{item.fecha_emecion}} </td>
+                    <td> {{item.nombre}} </td>
+                    <td>{{item.anulado}} </td>
+                    <td>{{item.numero_factura}} </td>
+                    <td>{{item.total}} </td>
+                    <td>
+                        <button (click)="verdetallesfactura(item)" class="btn btn-success">+</button>
+                    </td>
 
 
-  <div *ngIf="secuencia===2" >
+                </tr>
+
+            </ng-container>
+
+        </tbody>
+    </table>
+
+</div>
+
+
+<div *ngIf="secuencia===2">
     <div id="print-section" class="jumbotron ">
-      <!--Encabesado de la factura-->
-      <P style=" font-size: 6em;  
+        <!--Encabesado de la factura-->
+        <P style=" font-size: 6em;  
       color: rgba(52, 166, 214, 0.4);
       z-index: 9999;
      
@@ -130,211 +153,318 @@
       -ms-user-select: none;
       -o-user-select: none;
       user-select: none;">COPIA</P>
-      <div class="row" style="height: 70px;text-align: center; padding-top: 0px; padding-bottom: 0px;">
-          
-              <img  class="col-md-3"  style="width: 70px; height: 70px; float:left; width:20%;  padding-top: 0px; padding-bottom: 0px;  " src="../../../assets/logo1.gif">
-    
-          <div class="col-md-6"  style="float:left; width:60%;  padding-top: 0px; padding-bottom: 0px; height: 70px;">
-              <label  style="font-size: 12; LINE-HEIGHT:12px;  padding-top: 0px;">AGENCIA ADUANERA FONCECA CANACA S.de R.L</label>
-              <br style="margin-bottom: 0px; margin-top: 0px;" >
-              <label> <strong  style="color:red; font-size: 14; LINE-HEIGHT:12px;  padding-top: 0px; padding-bottom: 0px; ">FACTURA TGU:</strong>  {{facturaselecionada?.numero_factura}} </label>
-          </div>
-          <img class="col-md-3"   style="width: 70px; height: 70px; float:left; width:20%; padding-top: 0px; padding-bottom: 0px; " src="../../../assets/logo2.gif">
-       </div>
+        <div class="row" style="height: 70px;text-align: center; padding-top: 0px; padding-bottom: 0px;">
+
+            <img class="col-md-3"
+                style="width: 70px; height: 70px; float:left; width:20%;  padding-top: 0px; padding-bottom: 0px;  "
+                src="../../../assets/logo1.gif">
+
+            <div class="col-md-6" style="float:left; width:60%;  padding-top: 0px; padding-bottom: 0px; height: 70px;">
+                <label style="font-size: 12; LINE-HEIGHT:12px;  padding-top: 0px;">AGENCIA ADUANERA FONCECA CANACA S.de
+                    R.L</label>
+                <br style="margin-bottom: 0px; margin-top: 0px;">
+                <label> <strong
+                        style="color:red; font-size: 14; LINE-HEIGHT:12px;  padding-top: 0px; padding-bottom: 0px; ">FACTURA
+                        TGU:</strong> {{facturaselecionada?.numero_factura}} </label>
+            </div>
+            <img class="col-md-3"
+                style="width: 70px; height: 70px; float:left; width:20%; padding-top: 0px; padding-bottom: 0px; "
+                src="../../../assets/logo2.gif">
+        </div>
+
+
+
+        <div class="row">
+            <label for="" class="col-md-8"
+                style="float: left; width:50%;  text-align: left; font-size: 11; LINE-HEIGHT:12px;">CAI:
+                {{facturaselecionada?.cai}}</label>
+            <label for="" class="col-md-4"
+                style="float:left; width:50%; text-align: right; font-size: 11; LINE-HEIGHT:12px;">ORIGINAL</label>
+            <hr style="width:100%; margin-top: 0px; margin-bottom: 0px;">
+            <label class="col-md-12"
+                style="text-align: left; float:left; width:100%; font-size: 11;  LINE-HEIGHT:12px;"><strong
+                    style="color: red;">Fecha de emicion: {{facturaselecionada?.fecha_emecion}} </strong></label>
+            <label class="col-md-8"
+                style="text-align: left;; float:left; width:50%;  font-size: 11; LINE-HEIGHT:12px;"><strong
+                    style="color: red;">Vencimiento de pago: :
+                    {{facturaselecionada?.fecha_vencimiento}}</strong></label>
+            <label class="col-md-4"
+                style="text-align: right; float:left; width:50%; color: red; LINE-HEIGHT:12px;"><strong>Lp.
+                    {{subtotal + (subtotal * 0.15)}}</strong></label>
+            <label class="col-md-6" for=""
+                style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Facturado
+                    a:</strong></label>
+            <label class="col-md-6" for=""
+                style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Emitido
+                    por:</strong></label>
+            <label for="" class="col-md-6"
+                style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Cliente:
+                    {{facturaselecionada?.nombre}}</strong></label>
+            <label for="" class="col-md-6"
+                style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Agencia
+                    Aduanera Fonceca:</strong></label>
+            <label for="" class="col-md-6"
+                style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Direccion:
+                    {{facturaselecionada?.direccion}}</strong></label>
+            <label for="" class="col-md-6"
+                style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>RTN:08019011418473</strong></label>
+            <label for="" class="col-md-6"
+                style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>RTN:
+                    {{facturaselecionada?.rtn}}</strong></label>
+            <label class="col-md-6" for=""
+                style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Tegucigalpa,
+                    Colonia 15 de Septiembre</strong></label>
+            <label class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"
+                for=""><strong>Por conceptos de:</strong></label>
+            <label for="" class="col-md-6" for=""
+                style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>8 Calle
+                    Avenida Independencia Casa No. 1706</strong></label>
+            <label class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"
+                for=""><strong>{{facturaselecionada?.concepto}} </strong></label>
+            <label for="" class="col-md-6" for=""
+                style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>mail:info@fonsecanaca.com</strong></label>
+            <label for=""
+                style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>-----------------------------------------</strong></label>
+            <label for="" class="col-md-6" for=""
+                style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Telefono:
+                    504-3255-7109</strong></label>
+
+            <hr style="width:100%; margin-top: 0px; margin-bottom: 3px;">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table class=" " style="width: 100%; text-align: center; background: #F3D1B1;">
+                    <thead style="background: #DAF7B0;">
+                        <tr>
+                            <th
+                                style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">
+                                #</th>
+                            <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; ">Nombre
+                                Servicio</th>
+                            <th
+                                style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">
+                                Cantidad</th>
+                            <th
+                                style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">
+                                Precio</th>
+                            <th
+                                style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">
+                                Descuento</th>
+                            <th
+                                style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">
+                                Total</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background: #F5FCEB; text-align: left;">
+                        <ng-container *ngFor="let i of AregloDetalles; let n = index">
+                            <tr data-widget="expandable-table" aria-expanded="false">
+                                <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">
+                                    {{n+1}} </td>
+                                <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">
+                                    {{i.servicio}} </td>
+                                <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp.
+                                    {{i.cantidad}} </td>
+                                <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp.
+                                    {{i.precio}} </td>
+                                <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp.
+                                    {{i.descuento}} </td>
+                                <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp.
+                                    {{i.total}} </td>
+                            </tr>
+                        </ng-container>
+                        <tr data-widget="expandable-table" aria-expanded="false">
+                            <td colspan="2"
+                                style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Total
+                            </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"> </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"> </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"></td>
+                            <td
+                                style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px; color: red;">
+                                Lp. {{subtotal}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr style="width:100%; margin-top: 2px; margin-bottom: 2px;">
+            <div class="col-md-8" style=" float:left; width:60% ; ">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="col-md-4"
+                style="float:left; width:40%; background:F8D5B5; text-align: center;  margin-top: 0px; margin-bottom: 0px;">
+                <table style="background: #F8D5B5; width: 100%; height: 100px !important; ">
+                    <tbody style=" height: 50px; margin-top: 0px; margin-bottom: 0px;">
+                        <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                            <td style="margin-top: 0px; margin-bottom: 0px;  font-size: 10;">IMPORTE EXONERADO </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp. 0</td>
+
+                        </tr>
+                        <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; background: #F8D5B5;">IMPORTE
+                                EXENTO
+                            </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; background: #F8D5B5;">Lp. 0
+                            </td>
+
+                        </tr>
+                        <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">IMPORTE GRAVADO 15%
+                            </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp. {{subtotal}} </td>
+
+                        </tr>
+                        <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">IMPORTE GRAVADO 18%
+                            </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp. 0</td>
+
+                        </tr>
+                        <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">ISV 15%
+                            </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp. {{(subtotal * 0.15)}}
+                            </td>
+
+                        </tr>
+                        <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">ISV 18%
+                            </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp. 0 </td>
+
+                        </tr>
+                        <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">TOTAL A PAGAR
+                            </td>
+                            <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp.
+                                {{subtotal + (subtotal * 0.15)}} </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr style="width:100%; margin-top: 0px; margin-bottom: 3px;">
+            <div class="col-md-12" style=" margin-top: 1px;">
+                <p style="font-size: 8; margin-top:  2px; margin-bottom: 0px; LINE-HEIGHT:8px;">Valor en letras</p>
+                <label style="font-size: 12; margin-bottom: 0px; LINE-HEIGHT:8px;" for=""><strong> {{numero_en_letra}}
+                    </strong></label>
+                <hr style="width:100%;  margin-top: 0px; margin-bottom: 0px; ">
+            </div>
+            <label class="col-md-6" for=""
+                style="color: #713802; float:left; width:50%; font-size: 10px; margin-bottom: 0px; margin-top: 2px; LINE-HEIGHT:8px;">DETALLES
+                DEL PAGO</label>
+            <label class="col-md-6" for=""
+                style="color: #713802; float:left; width:50%; font-size: 10px; margin-bottom: 0px; margin-top: 2px; text-align: right; LINE-HEIGHT:8px;">INFORMACION
+                ADICIONAL</label>
+
+
+
+            <label class="col-md-6"
+                style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for="">Nombre
+                del beneficiario Agencia Aduanera Fonseca Canaca S de RL</label>
+
+            <label class="col-md-6"
+                style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;"
+                for="">www.fonsecanaca.com</label>
+
+
+            <label class="col-md-6"
+                style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for="">Nombre
+                del banco: BAC </label>
+
+            <label class="col-md-6"
+                style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;"
+                for="">info@fonsecanaca.com</label>
+
+
+            <label class="col-md-6"
+                style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for="">
+                Tegucigalpa
+            </label>
+
+            <label class="col-md-6"
+                style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;"
+                for="">
+            </label>
+
+            <div class="col-md-6" style=" float:left; width:60% ; margin-top: 0px; margin-bottom: 0px;">
+                <label
+                    style="  float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;"
+                    for=""> Número de cuenta 723246301
+                </label>
+
+                <label
+                    style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;"
+                    for=""> Fecha Limite de Emision: 28 DE ENERO DEL 2021
+                </label>
+
+                <label
+                    style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;"
+                    for=""> Rango Autorizado: {{numeracionFactura?.rango_inicio}} al {{numeracionFactura?.rango_fin}}
+                </label>
+
+                <label
+                    style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;"
+                    for=""> Original : Cliente Copia : Emisor
+                </label>
+
+            </div>
+            <div class="col-md-6" style=" float:left; width:40% ; ">
+                <table class="">
+
+                    <tbody>
+                        <tr data-widget="expandable-table" aria-expanded="false">
+                            <td style=" font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No.
+                                Correlativo Orden de Compra Exenta
+                            </td>
+
+
+                        </tr>
+                        <tr data-widget="expandable-table" aria-expanded="false">
+                            <td style="  font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No.
+                                Correlativo de Constancia de Registro Exonerado
+                            </td>
+
+                        </tr>
+                        <tr data-widget="expandable-table" aria-expanded="false">
+                            <td style="  font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No.
+                                Identificativo del Regisro de la SAG
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <hr style="width:100%; margin-top: 0px; margin-bottom: 1px;">
+
+            <label class="col-md-12" style="text-align: center; font-size: 8px; LINE-HEIGHT:8px;"><strong>EL PAGO DEBE
+                    REALIZARSE POR TRANSFERENCIA BANCARIA O MEDIANTE CHEQUE A NOMBRE DE AGENCIA ADUANERA
+                    FONSECA CANACA S DE RL.</strong></label>
+
+
+
+        </div>
+
+    </div>
+
+    <div class="row" style="align-items: center;" >
        
-    
-  
-      <div class="row">
-              <label for="" class="col-md-8" style="float: left; width:50%;  text-align: left; font-size: 11; LINE-HEIGHT:12px;">CAI: {{facturaselecionada?.cai}}</label>
-              <label for="" class="col-md-4" style="float:left; width:50%; text-align: right; font-size: 11; LINE-HEIGHT:12px;">ORIGINAL</label>
-              <hr style="width:100%; margin-top: 0px; margin-bottom: 0px;">
-              <label class="col-md-12" style="text-align: left; float:left; width:100%; font-size: 11;  LINE-HEIGHT:12px;"><strong style="color: red;" >Fecha de emicion:    {{facturaselecionada?.fecha_emecion}} </strong></label>
-              <label class="col-md-8" style="text-align: left;; float:left; width:50%;  font-size: 11; LINE-HEIGHT:12px;"><strong style="color: red;">Vencimiento de pago: : {{facturaselecionada?.fecha_vencimiento}}</strong></label>
-              <label class="col-md-4"  style="text-align: right; float:left; width:50%; color: red; LINE-HEIGHT:12px;" ><strong>Lp. {{subtotal + (subtotal * 0.15)}}</strong></label>
-             <label class="col-md-6" for="" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Facturado a:</strong></label>
-             <label class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Emitido por:</strong></label>
-             <label for=""  class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Cliente: {{facturaselecionada?.nombre}}</strong></label>
-             <label for="" class="col-md-6" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Agencia Aduanera Fonceca:</strong></label>
-             <label for="" class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Direccion: {{facturaselecionada?.direccion}}</strong></label>
-             <label for=""  class="col-md-6" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>RTN:08019011418473</strong></label>
-             <label for="" class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;" ><strong>RTN: {{facturaselecionada?.rtn}}</strong></label>
-             <label  class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Tegucigalpa, Colonia 15 de Septiembre</strong></label>
-             <label class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;" for=""><strong>Por conceptos de:</strong></label>
-             <label for=""  class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>8 Calle Avenida Independencia Casa No. 1706</strong></label>
-             <label class="col-md-6" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"  for=""><strong>{{facturaselecionada?.concepto}} </strong></label>
-             <label for="" class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>mail:info@fonsecanaca.com</strong></label>
-             <label for="" style="text-align: left; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;" ><strong>-----------------------------------------</strong></label>
-             <label for="" class="col-md-6" for="" style="text-align: right; float:left; width:50%; font-size: 11; LINE-HEIGHT:12px;"><strong>Telefono: 504-3255-7109</strong></label>
-          
-             <hr style="width:100%; margin-top: 0px; margin-bottom: 3px;">
-      </div>
-      <div class="row">
-          <div class="col-md-12">
-              <table class=" " style="width: 100%; text-align: center; background: #F3D1B1;">
-                  <thead style="background: #DAF7B0;">
-                      <tr>
-                          <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">#</th>
-                          <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; " >Nombre Servicio</th>
-                          <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Cantidad</th>
-                          <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Precio</th>
-                          <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Descuento</th>
-                          <th style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px; text-align: left;">Total</th>
-                      </tr>
-                  </thead>
-                  <tbody style="background: #F5FCEB; text-align: left;">
-                      <ng-container *ngFor="let i of AregloDetalles; let n = index">
-                          <tr data-widget="expandable-table" aria-expanded="false">
-                              <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">{{n+1}} </td>
-                              <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">{{i.servicio}} </td>
-                              <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.cantidad}} </td>
-                              <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.precio}} </td>
-                              <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.descuento}} </td>
-                              <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Lp. {{i.total}} </td>
-                          </tr>
-                      </ng-container>
-                      <tr data-widget="expandable-table" aria-expanded="false">
-                          <td colspan="2" style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px;">Total </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"> </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"> </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 8; LINE-HEIGHT:15px;"></td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; LINE-HEIGHT:15px; color: red;">Lp. {{subtotal}} </td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-          <hr style="width:100%; margin-top: 2px; margin-bottom: 2px;">
-          <div class="col-md-8"  style=" float:left; width:60% ; ">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </div>
-          <div class="col-md-4"  style="float:left; width:40%; background:F8D5B5; text-align: center;  margin-top: 0px; margin-bottom: 0px;">
-              <table  style="background: #F8D5B5; width: 100%; height: 100px !important; " >
-                 <tbody style=" height: 50px; margin-top: 0px; margin-bottom: 0px;" >
-                      <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
-                          <td  style="margin-top: 0px; margin-bottom: 0px;  font-size: 10;">IMPORTE EXONERADO </td>
-                          <td  style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. 0</td>
-                          
-                      </tr>
-                      <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10; background: #F8D5B5;" >IMPORTE EXENTO
-                          </td>
-                          <td  style="margin-top: 0px; margin-bottom: 0px; font-size: 10; background: #F8D5B5;">Lp. 0</td>
-                          
-                      </tr>
-                      <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
-                          <td  style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">IMPORTE GRAVADO 15%
-                          </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. {{subtotal}} </td>
-                          
-                      </tr>
-                      <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >IMPORTE GRAVADO 18%
-                          </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. 0</td>
-                          
-                      </tr>
-                      <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >ISV 15%
-                          </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp.  {{(subtotal * 0.15)}} </td>
-                          
-                      </tr>
-                      <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;">
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >ISV 18%
-                          </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >Lp. 0 </td>
-                          
-                      </tr>
-                      <tr style="margin-top: 0px; margin-bottom: 0px; background: #F8D5B5;" >
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;" >TOTAL A PAGAR
-                          </td>
-                          <td style="margin-top: 0px; margin-bottom: 0px; font-size: 10;">Lp. {{subtotal + (subtotal * 0.15)}} </td>
-                          
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-          <hr style="width:100%; margin-top: 0px; margin-bottom: 3px;">
-          <div class="col-md-12" style=" margin-top: 1px;">
-              <p style="font-size: 8; margin-top:  2px; margin-bottom: 0px; LINE-HEIGHT:8px;">Valor en letras</p>
-              <label style="font-size: 12; margin-bottom: 0px; LINE-HEIGHT:8px;" for=""><strong> {{numero_en_letra}} </strong></label>
-              <hr style="width:100%;  margin-top: 0px; margin-bottom: 0px; ">
-          </div>
-          <label class="col-md-6" for="" style="color: #713802; float:left; width:50%; font-size: 10px; margin-bottom: 0px; margin-top: 2px; LINE-HEIGHT:8px;">DETALLES DEL PAGO</label>
-          <label  class="col-md-6"for="" style="color: #713802; float:left; width:50%; font-size: 10px; margin-bottom: 0px; margin-top: 2px; text-align: right; LINE-HEIGHT:8px;">INFORMACION ADICIONAL</label>
-        
-  
-       
-          <label class="col-md-6" style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for="">Nombre del beneficiario Agencia Aduanera Fonseca Canaca S de RL</label>
-        
-          <label class="col-md-6"  style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;" for="">www.fonsecanaca.com</label>
-        
-         
-          <label class="col-md-6" style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for="">Nombre del banco: BAC </label>
-        
-          <label class="col-md-6"  style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;" for="">info@fonsecanaca.com</label>
-         
-        
-          <label class="col-md-6" style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px;" for=""> Tegucigalpa
-          </label>
-    
-          <label class="col-md-6"  style="  float:left; width:50%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; text-align: right;" for=""> 
-          </label>
-        
-         <div class="col-md-6" style=" float:left; width:60% ; margin-top: 0px; margin-bottom: 0px;">
-          <label style="  float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Número de cuenta 723246301
-          </label>
-         
-          <label style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Fecha Limite de Emision: 28 DE ENERO DEL 2021
-          </label>
-       
-          <label style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Rango Autorizado: {{numeracionFactura?.rango_inicio}} al  {{numeracionFactura?.rango_fin}}
-          </label>
-          
-          <label style="float:left; width:100%; font-size: 10px; margin-bottom: 1px; ; LINE-HEIGHT:8px; margin-top: 0px; margin-bottom: 0px;" for=""> Original : Cliente Copia : Emisor 
-          </label>
-          
-         </div>
-         <div class="col-md-6" style=" float:left; width:40% ; " >
-          <table class="" >
-            
-              <tbody >
-                  <tr data-widget="expandable-table" aria-expanded="false">
-                      <td style=" font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No. Correlativo Orden de Compra Exenta
-                      </td>
-                   
-                    
-                  </tr>
-                  <tr  data-widget="expandable-table" aria-expanded="false">
-                      <td style="  font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No. Correlativo de Constancia de Registro Exonerado
-                      </td>
-                    
-                  </tr>
-                  <tr  data-widget="expandable-table" aria-expanded="false">
-                      <td style="  font-size: 12px;  LINE-HEIGHT:10px; margin-top: 0px; margin-bottom: 0px;">No. Identificativo del Regisro de la SAG
-                      </td>
-                      
-                  </tr>
-  
-              </tbody>
-          </table>
-        
-         </div>
-         
-         <hr style="width:100%; margin-top: 0px; margin-bottom: 1px;">
-        
-               <label class="col-md-12" style="text-align: center; font-size: 8px; LINE-HEIGHT:8px;"><strong>EL PAGO DEBE REALIZARSE POR TRANSFERENCIA BANCARIA O MEDIANTE CHEQUE A NOMBRE DE AGENCIA ADUANERA
-                  FONSECA CANACA S DE RL.</strong></label>
-        
-  
-      
-      </div>
-  
-      </div>
-    
-  
-      <button   printSectionId="print-section" ngxPrint>Imprimir</button>
-        <button class="btn btn-primary" (click)="siguiente(1)">atras</button>
-  </div>
+    </div>
+    <div class="container-fluid h-100"> 
+        <div class="row w-100 align-items-center">
+            <div class="col text-center">
+                <button class="btn btn-success"  printSectionId="print-section" style="margin-right: 5px;" ngxPrint>Imprimir</button>
+                <button class="btn btn-danger" (click)="siguiente(1)">Atras</button>
+               
+            </div>	
+        </div>
+
+
+    </div>
+   
+</div>
